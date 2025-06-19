@@ -6,10 +6,9 @@ public class Students {
 	private String name;
 	private String id;
 	private String grade;
-	public Students(String id,String name,String grade) {
+	public Students(String id,String name) {
 		this.id = id;
 		this.name=name;
-		this.grade= grade;
 	}
 	public void setName(String name) {
 		this.name= name;
