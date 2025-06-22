@@ -9,6 +9,7 @@ public class Students {
 	public Students(String id,String name) {
 		this.id = id;
 		this.name=name;
+		this.grade = ""; 
 	}
 	public void setName(String name) {
 		this.name= name;

@@ -1,165 +1,109 @@
 package studentgrademanager;
 
-import java.awt.EventQueue;
+import studentgrademanager.AddStudentPanel;
+import studentgrademanager.ViewStudentsPanel;
+import studentgrademanager.RemoveStudentPanel;
+import studentgrademanager.UpdateStudentMarksPanel;
 
-import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
 import java.awt.CardLayout;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
 import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JPopupMenu;
+import java.awt.EventQueue;
 import java.awt.Component;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 public class StudentManagerGUI {
 
-	private JFrame StudentManagement;
-	private JLayeredPane layeredPane;
+    private JFrame frame;
+    private JLayeredPane layeredPane;
+    private StudentController controller;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StudentManagerGUI window = new StudentManagerGUI();
-					window.StudentManagement.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	/**
-	 * Create the application.
-	 */
-	public StudentManagerGUI() {
-		initialize();
-	}
-	
-	public void switchPanel(JPanel panel) {
-		layeredPane.removeAll();
-		layeredPane.add(panel);
-		layeredPane.repaint();
-		layeredPane.revalidate();
-	}
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                StudentManagerGUI window = new StudentManagerGUI();
+                window.frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		StudentManagement = new JFrame();
-		StudentManagement.setTitle("Student Management");
-		StudentManagement.setBounds(100, 100, 832, 546);
-		StudentManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		StudentManagement.getContentPane().setLayout(null);
-		
-		layeredPane = new JLayeredPane();
-		layeredPane.setBounds(171, 0, 645, 507);
-		StudentManagement.getContentPane().add(layeredPane);
-		layeredPane.setLayout(new CardLayout(0, 0));
-		
-		JPanel AddNewStudentPanel = new JPanel();
-		layeredPane.add(AddNewStudentPanel, "name_13706243350800");
-		
-		JLabel lblNewLabel = new JLabel("Add Students");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-		AddNewStudentPanel.add(lblNewLabel);
-		
-		JPanel DisplayAllStudentPanel = new JPanel();
-		layeredPane.add(DisplayAllStudentPanel, "name_13810113034700");
-		
-		JLabel lblNewLabel_1 = new JLabel("Students");
-		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-		DisplayAllStudentPanel.add(lblNewLabel_1);
-		
-		JPanel RemoveStudentPanel = new JPanel();
-		layeredPane.add(RemoveStudentPanel, "name_13882132468800");
-		
-		JLabel lblNewLabel_2 = new JLabel("Remove Student");
-		lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-		RemoveStudentPanel.add(lblNewLabel_2);
-		
-		JPanel UpdateStudentMarksPanel = new JPanel();
-		layeredPane.add(UpdateStudentMarksPanel, "name_13909379475100");
-		
-		JLabel lblNewLabel_3 = new JLabel("Marks Updater");
-		lblNewLabel_3.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-		UpdateStudentMarksPanel.add(lblNewLabel_3);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(64, 0, 64));
-		panel.setBounds(-12, -8, 172, 507);
-		StudentManagement.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		JButton addStudent = new JButton("Add Student");
-		addStudent.setForeground(new Color(255, 255, 255));
-		addStudent.setBackground(new Color(64, 0, 64));
-		addStudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(AddNewStudentPanel);
-			}
-		});
-		addStudent.setBounds(0, 10, 172, 48);
-		panel.add(addStudent);
-		
-		JButton removeStudent = new JButton("Remove Student");
-		removeStudent.setForeground(new Color(255, 255, 255));
-		removeStudent.setBackground(new Color(64, 0, 64));
-		removeStudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(RemoveStudentPanel);
-			}
-		});
-		removeStudent.setBounds(0, 55, 172, 48);
-		panel.add(removeStudent);
-		
-		JButton UpdateStudentMarks = new JButton("Update Marks");
-		UpdateStudentMarks.setForeground(new Color(255, 255, 255));
-		UpdateStudentMarks.setBackground(new Color(64, 0, 64));
-		UpdateStudentMarks.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(UpdateStudentMarksPanel);
-			}
-		});
-		UpdateStudentMarks.setBounds(0, 95, 172, 48);
-		panel.add(UpdateStudentMarks);
-		
-		JButton ViewAllStudents = new JButton("View Student");
-		ViewAllStudents.setForeground(new Color(255, 255, 255));
-		ViewAllStudents.setBackground(new Color(64, 0, 64));
-		ViewAllStudents.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(DisplayAllStudentPanel);
-			}
-		});
-		ViewAllStudents.setBounds(0, 140, 172, 43);
-		panel.add(ViewAllStudents);
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
-	}
+    public StudentManagerGUI() {
+        controller = new StudentController();
+        initialize();
+    }
+
+    private void initialize() {
+        frame = new JFrame();
+        frame.setTitle("Student Management");
+        frame.setBounds(100, 100, 832, 546);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);
+
+        // Card container
+        layeredPane = new JLayeredPane();
+        layeredPane.setBounds(171, 0, 645, 507);
+        frame.getContentPane().add(layeredPane);
+        layeredPane.setLayout(new CardLayout(0, 0));
+
+        // Panels
+        AddStudentPanel addPanel = new AddStudentPanel(controller);
+        ViewStudentsPanel viewPanel = new ViewStudentsPanel(controller);
+        RemoveStudentPanel removePanel = new RemoveStudentPanel(controller);
+        UpdateStudentMarksPanel updatePanel = new UpdateStudentMarksPanel(controller);
+
+        layeredPane.add(addPanel, "Add");
+        layeredPane.add(viewPanel, "View");
+        layeredPane.add(removePanel, "Remove");
+        layeredPane.add(updatePanel, "Update");
+
+   
+        JPanel sidebar = new JPanel();
+        sidebar.setBackground(new Color(64, 0, 64));
+        sidebar.setBounds(0, 0, 172, 507);
+        frame.getContentPane().add(sidebar);
+        sidebar.setLayout(null);
+
+        sidebar.add(createNavButton("Add Student", 10, e -> switchPanel("Add")));
+        sidebar.add(createNavButton("Remove Student", 65, e -> switchPanel("Remove")));
+        sidebar.add(createNavButton("Update Marks", 120, e -> switchPanel("Update")));
+        sidebar.add(createNavButton("View Students", 175, e -> switchPanel("View")));
+    }
+
+    private JButton createNavButton(String text, int y, ActionListener action) {
+        JButton button = new JButton(text);
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(64, 0, 64));
+        button.setBounds(0, y, 172, 48);
+        button.addActionListener(action);
+        return button;
+    }
+
+    private void switchPanel(String name) {
+        CardLayout layout = (CardLayout) layeredPane.getLayout();
+        layout.show(layeredPane, name);
+    }
+
+    @SuppressWarnings("unused")
+    private static void addPopup(Component component, final JPopupMenu popup) {
+        component.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                if (e.isPopupTrigger()) showMenu(e);
+            }
+            public void mouseReleased(MouseEvent e) {
+                if (e.isPopupTrigger()) showMenu(e);
+            }
+            private void showMenu(MouseEvent e) {
+                popup.show(e.getComponent(), e.getX(), e.getY());
+            }
+        });
+    }
 }
