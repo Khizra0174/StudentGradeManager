@@ -8,7 +8,6 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JScrollPane;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -17,12 +16,11 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+
 
 public class StudentManagerGUI {
 
-	private JFrame frame;
+	private JFrame StudentManagement;
 	private JLayeredPane layeredPane;
 
 	/**
@@ -33,7 +31,7 @@ public class StudentManagerGUI {
 			public void run() {
 				try {
 					StudentManagerGUI window = new StudentManagerGUI();
-					window.frame.setVisible(true);
+					window.StudentManagement.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -58,14 +56,15 @@ public class StudentManagerGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 832, 546);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		StudentManagement = new JFrame();
+		StudentManagement.setTitle("Student Management");
+		StudentManagement.setBounds(100, 100, 832, 546);
+		StudentManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		StudentManagement.getContentPane().setLayout(null);
 		
 		layeredPane = new JLayeredPane();
 		layeredPane.setBounds(171, 0, 645, 507);
-		frame.getContentPane().add(layeredPane);
+		StudentManagement.getContentPane().add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
 		
 		JPanel AddNewStudentPanel = new JPanel();
@@ -98,44 +97,52 @@ public class StudentManagerGUI {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(64, 0, 64));
-		panel.setBounds(0, 0, 172, 507);
-		frame.getContentPane().add(panel);
+		panel.setBounds(-12, -8, 172, 507);
+		StudentManagement.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JButton addStudent = new JButton("Add Student");
+		addStudent.setForeground(new Color(255, 255, 255));
+		addStudent.setBackground(new Color(64, 0, 64));
 		addStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(AddNewStudentPanel);
 			}
 		});
-		addStudent.setBounds(0, 0, 172, 43);
+		addStudent.setBounds(0, 10, 172, 48);
 		panel.add(addStudent);
 		
 		JButton removeStudent = new JButton("Remove Student");
+		removeStudent.setForeground(new Color(255, 255, 255));
+		removeStudent.setBackground(new Color(64, 0, 64));
 		removeStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(RemoveStudentPanel);
 			}
 		});
-		removeStudent.setBounds(0, 42, 172, 43);
+		removeStudent.setBounds(0, 55, 172, 48);
 		panel.add(removeStudent);
 		
 		JButton UpdateStudentMarks = new JButton("Update Marks");
+		UpdateStudentMarks.setForeground(new Color(255, 255, 255));
+		UpdateStudentMarks.setBackground(new Color(64, 0, 64));
 		UpdateStudentMarks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(UpdateStudentMarksPanel);
 			}
 		});
-		UpdateStudentMarks.setBounds(0, 85, 172, 43);
+		UpdateStudentMarks.setBounds(0, 95, 172, 48);
 		panel.add(UpdateStudentMarks);
 		
 		JButton ViewAllStudents = new JButton("View Student");
+		ViewAllStudents.setForeground(new Color(255, 255, 255));
+		ViewAllStudents.setBackground(new Color(64, 0, 64));
 		ViewAllStudents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(DisplayAllStudentPanel);
 			}
 		});
-		ViewAllStudents.setBounds(0, 127, 172, 43);
+		ViewAllStudents.setBounds(0, 140, 172, 43);
 		panel.add(ViewAllStudents);
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
